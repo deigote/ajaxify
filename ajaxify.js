@@ -30,10 +30,10 @@
 
 function ajaxifyLink(linkPath, updatePath, urlAttr, event, requestType, params) {
 	// Default values
-	if (!urlAttr) urlAttr = "href";
-	if (!event) event = "click";
-	if (!params) params = "";
-	if (!requestType) requestType = "GET";
+	urlAttr = urlAttr || "href";
+	event = event || "click";
+	params = params || "";
+	requestType = requestType || "GET";
 
     // Ajaxify the link or the form
 	jQuery(linkPath).bind(event, 
