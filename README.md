@@ -11,6 +11,11 @@ Dependencies
 
   * jQuery - http://jquery.com
 
+Available in
+-------------------------
+
+  * http://deigote.github.io/javascripts/ajaxify.js
+
 Usage
 -------------------------
 
