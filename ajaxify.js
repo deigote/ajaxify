@@ -11,6 +11,17 @@
  *       "action",
  *       "submit",
  *       "POST");
+ *
+ * If your web framework only generates relative links (as for example Grails), 
+ * you can also ajaxify the whole web app by including the following at the end
+ * of all your http responses:
+ *    ajaxifyLink('a[href^="/"]', '#content');
+ *    ajaxifyLink('form[action^="/"]', '#content', 'action', 'submit', 'POST');
+ * This will update the content div with the webapp response. This approach is 
+ * specially useful when combined with a main layout which can detect if the 
+ * current request is loaded using XHR or not and then render the whole layout 
+ * or only the response. A Grails example can be found in 
+ * http://stackoverflow.com/questions/8736277/grails-resources-plugin-and-ajax-loaded-javascript/16354603#answer-16354603
  */
 
 /*
