@@ -39,24 +39,28 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/lgpl-3.0.txt>.
  */
 
-function ajaxifyLink(linkPath, updatePath, urlAttr, event, requestType, params) {
+function ajaxifyLink(linkPath, updatePath, urlAttr, event, requestType, params, beforeSendCallback, completeCallback, successCallback, errorCallback) {
 	// Default values
 	urlAttr = urlAttr || "href";
 	event = event || "click";
 	params = params || "";
 	requestType = requestType || "GET";
+	beforeSendCallback = beforeSendCallback || function (request) { jQuery("#loading").slideDown("fast"); };
+	completeCallback = completeCallback || function (xhr, status) { jQuery("#loading").slideUp("fast"); };
+	successCallback = successCallback || function (data, status) { jQuery(updatePath).html(data); };
+	errorCallback = errorCallback || function (xhr, status, error) { return true; };
 
-    // Ajaxify the link or the form
+	// Ajaxify the link or the form
 	jQuery(linkPath).bind(event, 
 		function() {
 			jQuery.ajax({
 				type: requestType,
 				url: jQuery(this).attr(urlAttr),
 				data: (params == "" && requestType == "POST" && event == "submit") ? jQuery(this).serialize() : params,
-				beforeSend: function (request) { jQuery("#loading").slideDown("fast"); },
-				complete: function (xhr, status) { jQuery("#loading").slideUp("fast"); },
-				success: function (data, status) { jQuery(updatePath).html(data);},
-				error: function (xhr, status, error) { return true;	}
+				beforeSend: beforeSendCallback, 
+				complete: completeCallback,
+				success: successCallback,
+				error: errorCallback
 			});
 		return false;
 	});
