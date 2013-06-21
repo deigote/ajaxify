@@ -56,7 +56,7 @@ function ajaxifyLink(linkPath, updatePath, urlAttr, event, requestType, params, 
 			jQuery.ajax({
 				type: requestType,
 				url: jQuery(this).attr(urlAttr),
-				data: (params == "" && requestType == "POST" && event == "submit") ? jQuery(this).serialize() : params,
+				data: (params == "" && event == "submit") ? jQuery(this).serialize() : params,
 				beforeSend: beforeSendCallback, 
 				complete: completeCallback,
 				success: successCallback,
